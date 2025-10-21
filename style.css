@@ -2,3 +2,100 @@ html {
   height: 100%;
   width: 100%;
 }
+/* General body styling */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1f4037, #99f2c8);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Container styling for the password generator box */
+.container {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  text-align: center;
+  width: 350px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Fade-in animation for container */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Title styling */
+h1 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+/* Label styling */
+label {
+  display: block;
+  margin: 8px 0;
+}
+
+/* Number input styling */
+input[type="number"] {
+  width: 80px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+}
+
+/* Button styling */
+button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #00bfa6;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #009f88;
+  transform: scale(1.05);
+}
+
+/* Output section styling */
+.output {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#passwordOutput {
+  width: 200px;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+}
+
+/* Options checkboxes styling */
+.options {
+  text-align: left;
+  margin-top: 10px;
+}
+
+/* Footer styling */
+.footer {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
