@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Password Generator</title>
+
+  <style>
+    /* General body styling */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1f4037, #99f2c8);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Container styling for the password generator box */
+    .container {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      text-align: center;
+      width: 350px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Fade-in animation for container */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Title styling */
+    h1 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    /* Label styling */
+    label {
+      display: block;
+      margin: 8px 0;
+    }
+
+    /* Number input styling */
+    input[type="number"] {
+      width: 80px;
+      padding: 5px;
+      border-radius: 5px;
+      border: none;
+      text-align: center;
+    }
+
+    /* Button styling */
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      background-color: #00bfa6;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #009f88;
+      transform: scale(1.05);
+    }
+
+    /* Output section styling */
+    .output {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #passwordOutput {
+      width: 200px;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+      text-align: center;
+    }
+
+    /* Options checkboxes styling */
+    .options {
+      text-align: left;
+      margin-top: 10px;
+    }
+
+    /* Footer styling */
+    .footer {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Main heading -->
+    <h1>🔐 Secure Password Generator</h1>
+
+    <!-- Password configuration options -->
+    <div class="config">
+      <label for="length">Password Length:</label>
+      <input type="number" id="length" min="4" max="50" value="12">
+
+      <div class="options">
+        <label><input type="checkbox" id="uppercase" checked> Uppercase Letters (A-Z)</label>
+        <label><input type="checkbox" id="lowercase" checked> Lowercase Letters (a-z)</label>
+        <label><input type="checkbox" id="numbers" checked> Numbers (0-9)</label>
+        <label><input type="checkbox" id="symbols" checked> Symbols (!@#$%)</label>
+      </div>
+    </div>
+
+    <!-- Button to generate password -->
+    <button id="generateBtn">Generate Password</button>
+
+    <!-- Output field and copy button -->
+    <div class="output">
+      <input type="text" id="passwordOutput" readonly>
+      <button id="copyBtn">Copy</button>
+    </div>
+
+    <!-- Footer info -->
+    <div class="footer">
+      <p>Project: <b>Secure Password Generator</b> | English for IT - 2025</p>
+    </div>
+  </div>
+
+  <script>
+    // Add click event listeners to buttons
+    document.getElementById('generateBtn').addEventListener('click', generatePassword);
+    document.getElementById('copyBtn').addEventListener('click', copyPassword);
+
+    // Function to generate the password
+    function generatePassword() {
+      // Get user-selected options
+      const length = document.getElementById('length').value;
+      const includeUppercase = document.getElementById('uppercase').checked;
+      const includeLowercase = document.getElementById('lowercase').checked;
+      const includeNumbers = document.getElementById('numbers').checked;
+      const includeSymbols = document.getElementById('symbols').checked;
+
+      // Define character sets
+      const upperChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const lowerChars = 'abcdefghijklmnopqrstuvwxyz';
+      const numberChars = '0123456789';
+      const symbolChars = '!@#$%^&*()_+[]{}|;:,.<>?';
+
+      // Combine selected character sets
+      let allChars = '';
+      if (includeUppercase) allChars += upperChars;
+      if (includeLowercase) allChars += lowerChars;
+      if (includeNumbers) allChars += numberChars;
+      if (includeSymbols) allChars += symbolChars;
+
+      // Alert if no option is selected
+      if (allChars === '') {
+        alert('Please select at least one option!');
+        return;
+      }
+
+      // Generate password randomly
+      let password = '';
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * allChars.length);
+        password += allChars[randomIndex];
+      }
+
+      // Display password in output field
+      document.getElementById('passwordOutput').value = password;
+    }
+
+    // Function to copy the generated password
+    function copyPassword() {
+      const password = document.getElementById('passwordOutput');
+      if (password.value === '') {
+        alert('No password to copy!');
+        return;
+      }
+      password.select();
+      document.execCommand('copy'); // Copies the selected text to clipboard
+      alert('Password copied to clipboard!');
+    }
+  </script>
+</body>
+</html>
